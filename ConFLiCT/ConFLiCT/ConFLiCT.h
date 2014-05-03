@@ -21,8 +21,8 @@
 
 #define FIRMWAREVERSION 5
 
-//#define REV2_1	// select when Hardware Revision 2.1
-#define REV2_2		// select when Hardware Revision 2.2
+#define REV2_1	// select when Hardware Revision 2.1
+//#define REV2_2		// select when Hardware Revision 2.2
 
 
 enum Stati{off,startup,on};
