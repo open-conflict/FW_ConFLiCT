@@ -1,0 +1,151 @@
+\hypertarget{_serialport_8c}{\section{Serialport.\-c File Reference}
+\label{_serialport_8c}\index{Serialport.\-c@{Serialport.\-c}}
+}
+
+
+Serialport communication via R\-S232.  
+
+
+{\ttfamily \#include $<$avr/io.\-h$>$}\\*
+{\ttfamily \#include $<$avr/interrupt.\-h$>$}\\*
+{\ttfamily \#include $<$stdbool.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}Serialport.\-h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{_serialport_8c_a7d2ad1b66db9224eff7468cbafe4f9d0}{serialport\-\_\-write} (uint8\-\_\-t $\ast$an\-Array, uint8\-\_\-t array\-Length)
+\begin{DoxyCompactList}\small\item\em This function you send an array (string). \end{DoxyCompactList}\item 
+\hypertarget{_serialport_8c_acdf978f69a52b8a2225b0536b5fbff0e}{{\bfseries I\-S\-R} (U\-S\-A\-R\-T\-C1\-\_\-\-D\-R\-E\-\_\-vect)}\label{_serialport_8c_acdf978f69a52b8a2225b0536b5fbff0e}
+
+\item 
+uint8\-\_\-t \hyperlink{_serialport_8c_a48f486016e00b1593a7098dc9df8dbb5}{serialport\-\_\-check\-Space} (void)
+\begin{DoxyCompactList}\small\item\em This function check how many bytes are free in the transmit buffer. \end{DoxyCompactList}\item 
+\hypertarget{_serialport_8c_a6c9949e5146d1feb028b0c2db8754523}{{\bfseries I\-S\-R} (U\-S\-A\-R\-T\-C1\-\_\-\-R\-X\-C\-\_\-vect)}\label{_serialport_8c_a6c9949e5146d1feb028b0c2db8754523}
+
+\item 
+uint8\-\_\-t \hyperlink{_serialport_8c_a4a6fdcfe4ee9f9044edfc40f9968e25a}{serialport\-\_\-get\-Last\-String} (uint8\-\_\-t $\ast$an\-Array, uint8\-\_\-t max\-Length)
+\begin{DoxyCompactList}\small\item\em This function gives you all received data to the next C\-R (carriage return) in string format. \end{DoxyCompactList}\item 
+\hypertarget{_serialport_8c_af386d3688b5e9b9ab460e6caf736a299}{void \hyperlink{_serialport_8c_af386d3688b5e9b9ab460e6caf736a299}{serialport\-\_\-init} (void)}\label{_serialport_8c_af386d3688b5e9b9ab460e6caf736a299}
+
+\begin{DoxyCompactList}\small\item\em This function initializes the U\-S\-A\-R\-T C1 to 8\-N1 with 57600 Baud and enables the R\-X\-C interrupt. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{_serialport_8c_a0af6c0452c6622b4cae3258d822c44ee}{serialport\-\_\-get\-Last\-Carriage} (\hyperlink{struct_c_a_r_r_i_a_g_e}{C\-A\-R\-R\-I\-A\-G\-E} $\ast$a\-C\-A\-R\-R\-I\-A\-G\-E)
+\begin{DoxyCompactList}\small\item\em This function gives you the last received carriage. \end{DoxyCompactList}\item 
+void \hyperlink{_serialport_8c_ae032fbb13c4f1a7ecc1239dbf40f9258}{serialport\-\_\-write\-Carriage} (\hyperlink{struct_c_a_r_r_i_a_g_e}{C\-A\-R\-R\-I\-A\-G\-E} $\ast$a\-C\-A\-R\-R\-I\-A\-G\-E)
+\begin{DoxyCompactList}\small\item\em This function send a carriage as string in the carriage format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Serialport communication via R\-S232. This library contains functions to communicate with the P\-C via R\-S232.\par
+ \begin{DoxyAuthor}{Author}
+Robert Steigemann 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+14 Oct 2013 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{_serialport_8c_a48f486016e00b1593a7098dc9df8dbb5}{\index{Serialport.\-c@{Serialport.\-c}!serialport\-\_\-check\-Space@{serialport\-\_\-check\-Space}}
+\index{serialport\-\_\-check\-Space@{serialport\-\_\-check\-Space}!Serialport.c@{Serialport.\-c}}
+\subsubsection[{serialport\-\_\-check\-Space}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t serialport\-\_\-check\-Space (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{_serialport_8c_a48f486016e00b1593a7098dc9df8dbb5}
+
+
+This function check how many bytes are free in the transmit buffer. 
+
+\begin{DoxyReturn}{Returns}
+Number of free bytes in the transmit buffer. 
+\end{DoxyReturn}
+\hypertarget{_serialport_8c_a0af6c0452c6622b4cae3258d822c44ee}{\index{Serialport.\-c@{Serialport.\-c}!serialport\-\_\-get\-Last\-Carriage@{serialport\-\_\-get\-Last\-Carriage}}
+\index{serialport\-\_\-get\-Last\-Carriage@{serialport\-\_\-get\-Last\-Carriage}!Serialport.c@{Serialport.\-c}}
+\subsubsection[{serialport\-\_\-get\-Last\-Carriage}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t serialport\-\_\-get\-Last\-Carriage (
+\begin{DoxyParamCaption}
+\item[{{\bf C\-A\-R\-R\-I\-A\-G\-E} $\ast$}]{a\-C\-A\-R\-R\-I\-A\-G\-E}
+\end{DoxyParamCaption}
+)}}\label{_serialport_8c_a0af6c0452c6622b4cae3258d822c44ee}
+
+
+This function gives you the last received carriage. 
+
+This function read out the last received string (witch should have the carriage format) and convert it to a carriage. It is protected against wrong string codes. The function use the \hyperlink{_serialport_8c_a4a6fdcfe4ee9f9044edfc40f9968e25a}{serialport\-\_\-get\-Last\-String()} function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\-C\-A\-R\-R\-I\-A\-G\-E} & The pointer to the carriage witch is assigned with the new data.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 0 everything fine, carriage received
+\begin{DoxyItemize}
+\item 1 no C\-R is received until the last execution (no new data available)
+\item $>$1 something is received, but isn't valid (details in implementation) 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{_serialport_8c_a4a6fdcfe4ee9f9044edfc40f9968e25a}{\index{Serialport.\-c@{Serialport.\-c}!serialport\-\_\-get\-Last\-String@{serialport\-\_\-get\-Last\-String}}
+\index{serialport\-\_\-get\-Last\-String@{serialport\-\_\-get\-Last\-String}!Serialport.c@{Serialport.\-c}}
+\subsubsection[{serialport\-\_\-get\-Last\-String}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t serialport\-\_\-get\-Last\-String (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{an\-Array, }
+\item[{uint8\-\_\-t}]{max\-Length}
+\end{DoxyParamCaption}
+)}}\label{_serialport_8c_a4a6fdcfe4ee9f9044edfc40f9968e25a}
+
+
+This function gives you all received data to the next C\-R (carriage return) in string format. 
+
+To get the string, it is necessary that your array is big enough to hold all data to the C\-R. If is not (max\-Length reached, before C\-R is) this function return 0 and data is lost. The max\-Length means all chars in the string including 0x00, so it should equals the array length!
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$an\-Array} & The pointer to the array assigned with the data. It have to be big enough to store all data received! \\
+\hline
+{\em max\-Length} & The length of the array. Correct value is necessary to prevent array overflow.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The amount of characters stored in the array including the string end sign 0x00! If 0 is returned, no C\-R is received or the array is to small. 
+\end{DoxyReturn}
+\hypertarget{_serialport_8c_a7d2ad1b66db9224eff7468cbafe4f9d0}{\index{Serialport.\-c@{Serialport.\-c}!serialport\-\_\-write@{serialport\-\_\-write}}
+\index{serialport\-\_\-write@{serialport\-\_\-write}!Serialport.c@{Serialport.\-c}}
+\subsubsection[{serialport\-\_\-write}]{\setlength{\rightskip}{0pt plus 5cm}void serialport\-\_\-write (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{an\-Array, }
+\item[{uint8\-\_\-t}]{array\-Length}
+\end{DoxyParamCaption}
+)}}\label{_serialport_8c_a7d2ad1b66db9224eff7468cbafe4f9d0}
+
+
+This function you send an array (string). 
+
+It uses 64 byte buffer. It is possible to overrun the buffer, don't send more than 64 bytes at one Time! Check the buffer space with the \hyperlink{_serialport_8c_a48f486016e00b1593a7098dc9df8dbb5}{serialport\-\_\-check\-Space()} function, before you use this function.\par
+Sending is interrupt driven and don't stop the controller. The function uses only the array\-Length. String end (0x00) would not be recognized!
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$an\-Array} & The pointer to the array with the data to send. \\
+\hline
+{\em array\-Length} & The number of bytes to send. \\
+\hline
+\end{DoxyParams}
+\hypertarget{_serialport_8c_ae032fbb13c4f1a7ecc1239dbf40f9258}{\index{Serialport.\-c@{Serialport.\-c}!serialport\-\_\-write\-Carriage@{serialport\-\_\-write\-Carriage}}
+\index{serialport\-\_\-write\-Carriage@{serialport\-\_\-write\-Carriage}!Serialport.c@{Serialport.\-c}}
+\subsubsection[{serialport\-\_\-write\-Carriage}]{\setlength{\rightskip}{0pt plus 5cm}void serialport\-\_\-write\-Carriage (
+\begin{DoxyParamCaption}
+\item[{{\bf C\-A\-R\-R\-I\-A\-G\-E} $\ast$}]{a\-C\-A\-R\-R\-I\-A\-G\-E}
+\end{DoxyParamCaption}
+)}}\label{_serialport_8c_ae032fbb13c4f1a7ecc1239dbf40f9258}
+
+
+This function send a carriage as string in the carriage format. 
+
+It transform a carriage into a valid string and send it vie the \hyperlink{_serialport_8c_a7d2ad1b66db9224eff7468cbafe4f9d0}{serialport\-\_\-write()} function. It use \hyperlink{_serialport_8c_a48f486016e00b1593a7098dc9df8dbb5}{serialport\-\_\-check\-Space()} function too and wait for enough space if the buffer is full. So in every case all data are transmitted and buffer overflow is not possible. Be careful when you send many carriages successively because the function W\-A\-I\-T if the buffer is full and no other code is executed until all carriages are copied into transmit buffer!
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\-C\-A\-R\-R\-I\-A\-G\-E} & The pointer to the carriage witch is transmitted. \\
+\hline
+\end{DoxyParams}
