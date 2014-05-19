@@ -760,126 +760,136 @@ int main(void)
 				switch(aDataSet.id)
 				{
 					case 0:								// ask for everything
-						aDataSet.id = 02;
-						aDataSet.index = 1;
-						aDataSet.data = FIRMWAREVERSION;
-						serialport_writeCarriage(&aDataSet);
-						aDataSet.index = 2;
-						aDataSet.data = EEPROMVERSION;
-						serialport_writeCarriage(&aDataSet);for (i=0;i<24;i++)
-						{
-							aDataSet.id = 11;			// 11
-							aDataSet.index = i+1;
-							aDataSet.data = channel_data[0].minTemp[i];
+						if(aDataSet.index == 0x00){		// Addet by debauer see mark db01
+							aDataSet.id = 02;
+							aDataSet.index = 1;
+							aDataSet.data = FIRMWAREVERSION;
 							serialport_writeCarriage(&aDataSet);
-							aDataSet.id = 21;			// 21
-							aDataSet.data = channel_data[0].maxTemp[i];
+							aDataSet.index = 2;
+							aDataSet.data = EEPROMVERSION;
+							serialport_writeCarriage(&aDataSet);for (i=0;i<24;i++)
+							{
+								aDataSet.id = 11;			// 11
+								aDataSet.index = i+1;
+								aDataSet.data = channel_data[0].minTemp[i];
+								serialport_writeCarriage(&aDataSet);
+								aDataSet.id = 21;			// 21
+								aDataSet.data = channel_data[0].maxTemp[i];
+								serialport_writeCarriage(&aDataSet);
+								aDataSet.id = 12;			// 12
+								aDataSet.data = channel_data[1].minTemp[i];
+								serialport_writeCarriage(&aDataSet);
+								aDataSet.id = 22;			// 22
+								aDataSet.data = channel_data[1].maxTemp[i];
+								serialport_writeCarriage(&aDataSet);
+								aDataSet.id = 13;			// 13
+								aDataSet.data = channel_data[2].minTemp[i];
+								serialport_writeCarriage(&aDataSet);
+								aDataSet.id = 23;			// 23
+								aDataSet.data = channel_data[2].maxTemp[i];
+								serialport_writeCarriage(&aDataSet);
+								aDataSet.id = 14;			// 14
+								aDataSet.data = channel_data[3].minTemp[i];
+								serialport_writeCarriage(&aDataSet);
+								aDataSet.id = 24;			// 24
+								aDataSet.data = channel_data[3].maxTemp[i];
+								serialport_writeCarriage(&aDataSet);							
+							}
+							aDataSet.id = 31;				// 31
+							for (i=0;i<8;i++)
+							{
+								aDataSet.index = i+17;
+								aDataSet.data = spare_temperature[i];
+								serialport_writeCarriage(&aDataSet);
+							}						
+							aDataSet.id = 32;				// 32
+							aDataSet.index = 1;
+							aDataSet.data = tempSensor_getOneWireAmount();
+							serialport_writeCarriage(&aDataSet);												
+							aDataSet.id = 33;				// 33
+							for (i=0;i<(8*tempSensor_getOneWireAmount());i++)
+							{
+								aDataSet.index = i+1;
+								aDataSet.data = tempSensor_getOneWireID(i);
+								serialport_writeCarriage(&aDataSet);
+							}						
+							aDataSet.id = 51;				// 51
+							aDataSet.index = 1;
+							aDataSet.data = alert_data.overtempEnable;
 							serialport_writeCarriage(&aDataSet);
-							aDataSet.id = 12;			// 12
-							aDataSet.data = channel_data[1].minTemp[i];
+							aDataSet.index = 2;
+							aDataSet.data = alert_data.fanblockEnable;
 							serialport_writeCarriage(&aDataSet);
-							aDataSet.id = 22;			// 22
-							aDataSet.data = channel_data[1].maxTemp[i];
+							aDataSet.id = 70;				// 70
+							aDataSet.index = 1;
+							aDataSet.data = pulsePerLiter;
 							serialport_writeCarriage(&aDataSet);
-							aDataSet.id = 13;			// 13
-							aDataSet.data = channel_data[2].minTemp[i];
+							aDataSet.index = 2;
+							aDataSet.data = alert_data.minWaterFlow;
 							serialport_writeCarriage(&aDataSet);
-							aDataSet.id = 23;			// 23
-							aDataSet.data = channel_data[2].maxTemp[i];
+							for (i=0;i<4;i++)
+							{
+								aDataSet.id = 71;				// 71
+								aDataSet.index = i+1;
+								aDataSet.data = channel_data[i].manualPower;
+								serialport_writeCarriage(&aDataSet);
+								aDataSet.id = 72;				// 72
+								aDataSet.data = channel_data[i].startupTime;
+								serialport_writeCarriage(&aDataSet);
+								aDataSet.id = 73;				// 73
+								aDataSet.data = channel_data[i].minimumPower;
+								serialport_writeCarriage(&aDataSet);
+								aDataSet.id = 74;				// 74
+								aDataSet.data = channel_data[i].automaticMode;
+								serialport_writeCarriage(&aDataSet);
+								aDataSet.id = 75;				// 75
+								aDataSet.data = channel_data[i].stopEnable;
+								serialport_writeCarriage(&aDataSet);
+								aDataSet.id = 76;				// 76
+								aDataSet.data = channel_data[i].threshold;
+								serialport_writeCarriage(&aDataSet);							
+							}
+							aDataSet.id = 77;					// 77
+							aDataSet.index = 1;
+							aDataSet.data = alphaDisplay.backlight;
 							serialport_writeCarriage(&aDataSet);
-							aDataSet.id = 14;			// 14
-							aDataSet.data = channel_data[3].minTemp[i];
+							aDataSet.index = 2;
+							aDataSet.data = alphaDisplay.contrast;
+							serialport_writeCarriage(&aDataSet);						
+							aDataSet.id = 78;					// 78
+							aDataSet.index = 1;
+							aDataSet.data = led_data.mode;
 							serialport_writeCarriage(&aDataSet);
-							aDataSet.id = 24;			// 24
-							aDataSet.data = channel_data[3].maxTemp[i];
-							serialport_writeCarriage(&aDataSet);							
-						}
-						aDataSet.id = 31;				// 31
-						for (i=0;i<8;i++)
-						{
-							aDataSet.index = i+17;
-							aDataSet.data = spare_temperature[i];
-							serialport_writeCarriage(&aDataSet);
-						}						
-						aDataSet.id = 32;				// 32
-						aDataSet.index = 1;
-						aDataSet.data = tempSensor_getOneWireAmount();
-						serialport_writeCarriage(&aDataSet);												
-						aDataSet.id = 33;				// 33
-						for (i=0;i<(8*tempSensor_getOneWireAmount());i++)
-						{
-							aDataSet.index = i+1;
-							aDataSet.data = tempSensor_getOneWireID(i);
-							serialport_writeCarriage(&aDataSet);
-						}						
-						aDataSet.id = 51;				// 51
-						aDataSet.index = 1;
-						aDataSet.data = alert_data.overtempEnable;
-						serialport_writeCarriage(&aDataSet);
-						aDataSet.index = 2;
-						aDataSet.data = alert_data.fanblockEnable;
-						serialport_writeCarriage(&aDataSet);
-						aDataSet.id = 70;				// 70
-						aDataSet.index = 1;
-						aDataSet.data = pulsePerLiter;
-						serialport_writeCarriage(&aDataSet);
-						aDataSet.index = 2;
-						aDataSet.data = alert_data.minWaterFlow;
-						serialport_writeCarriage(&aDataSet);
-						for (i=0;i<4;i++)
-						{
-							aDataSet.id = 71;				// 71
-							aDataSet.index = i+1;
-							aDataSet.data = channel_data[i].manualPower;
-							serialport_writeCarriage(&aDataSet);
-							aDataSet.id = 72;				// 72
-							aDataSet.data = channel_data[i].startupTime;
-							serialport_writeCarriage(&aDataSet);
-							aDataSet.id = 73;				// 73
-							aDataSet.data = channel_data[i].minimumPower;
-							serialport_writeCarriage(&aDataSet);
-							aDataSet.id = 74;				// 74
-							aDataSet.data = channel_data[i].automaticMode;
-							serialport_writeCarriage(&aDataSet);
-							aDataSet.id = 75;				// 75
-							aDataSet.data = channel_data[i].stopEnable;
-							serialport_writeCarriage(&aDataSet);
-							aDataSet.id = 76;				// 76
-							aDataSet.data = channel_data[i].threshold;
-							serialport_writeCarriage(&aDataSet);							
-						}
-						aDataSet.id = 77;					// 77
-						aDataSet.index = 1;
-						aDataSet.data = alphaDisplay.backlight;
-						serialport_writeCarriage(&aDataSet);
-						aDataSet.index = 2;
-						aDataSet.data = alphaDisplay.contrast;
-						serialport_writeCarriage(&aDataSet);						
-						aDataSet.id = 78;					// 78
-						aDataSet.index = 1;
-						aDataSet.data = led_data.mode;
-						serialport_writeCarriage(&aDataSet);
-						aDataSet.id = 79;					// 79
-						for (i=0;i<3;i++)
-						{
-							aDataSet.index = i+1;
-							aDataSet.data = led_data.manualPower[i];
-							serialport_writeCarriage(&aDataSet);
-						}
-						aDataSet.id = 80;					// 80
-						for (i=0;i<255;i++)				
-						{
-							aDataSet.index = i+1;
-							aDataSet.data = alphaDisplay.content[i];
-							serialport_writeCarriage(&aDataSet);
-						}
-						aDataSet.id = 81;					// 81
-						for (i=0;i<31;i++)
-						{
-							aDataSet.index = i+1;
-							aDataSet.data = alphaDisplay.screen[i];
-							serialport_writeCarriage(&aDataSet);
-						}									
+							aDataSet.id = 79;					// 79
+							for (i=0;i<3;i++)
+							{
+								aDataSet.index = i+1;
+								aDataSet.data = led_data.manualPower[i];
+								serialport_writeCarriage(&aDataSet);
+							}
+							aDataSet.id = 80;					// 80
+							for (i=0;i<255;i++)				
+							{
+								aDataSet.index = i+1;
+								aDataSet.data = alphaDisplay.content[i];
+								serialport_writeCarriage(&aDataSet);
+							}
+							aDataSet.id = 81;					// 81
+							for (i=0;i<31;i++)
+							{
+								aDataSet.index = i+1;
+								aDataSet.data = alphaDisplay.screen[i];
+								serialport_writeCarriage(&aDataSet);
+							}
+							
+							/* Changed 19.05.2014 by debauer (db01)
+							 * The GUI need to know when the Init is complete
+							 */
+							aDataSet.id = 0;	
+							aDataSet.index = 1;
+							aDataSet.data = 0;
+							serialport_writeCarriage(&aDataSet);			
+						}				
 						break;
 					
 					case 02:
