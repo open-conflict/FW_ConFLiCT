@@ -73,12 +73,12 @@
       <ToolOptions>
         <InterfaceProperties>
           <JtagEnableExtResetOnStartSession>false</JtagEnableExtResetOnStartSession>
-          <PdiClock>1060000</PdiClock>
+          <PdiClock>32000</PdiClock>
         </InterfaceProperties>
         <InterfaceName>PDI</InterfaceName>
       </ToolOptions>
-      <ToolType>com.atmel.avrdbg.tool.jtagicemk3</ToolType>
-      <ToolNumber>J30200005320</ToolNumber>
+      <ToolType>com.atmel.avrdbg.tool.jtagice3plus</ToolType>
+      <ToolNumber>J30200014217</ToolNumber>
       <ToolName>JTAGICE3</ToolName>
     </com_atmel_avrdbg_tool_jtagice3plus>
   </PropertyGroup>
